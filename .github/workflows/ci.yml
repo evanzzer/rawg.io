@@ -27,4 +27,4 @@ jobs:
     - name: Swift Linting
       run: swiftlint --config .swiftlint.yml
     - name: Build Project
-      run: xcodebuild build -project Rawg.io.xcodeproj -configuration Debug -scheme Rawg.io -allowProvisioningUpdates -showBuildTimingSummary
+      run: xcodebuild build -project Rawg.io.xcodeproj -configuration Debug -scheme Rawg.io CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -showBuildTimingSummary

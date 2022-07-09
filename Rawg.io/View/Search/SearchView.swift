@@ -10,12 +10,14 @@ import SwiftUI
 struct SearchView: View {
     @ObservedObject var presenter: SearchPresenter
     
+    private let router = SearchRouter()
+    
     var body: some View {
         VStack {
-            if presenter.loadingState {
+            if presenter.isLoading {
                 ProgressView().progressViewStyle(.circular)
             } else {
-                if !presenter.errorMessage.isEmpty {
+                if presenter.isError {
                     Text(presenter.errorMessage)
                 } else if presenter.list.count == 0 {
                     Text("No data has been found!")
@@ -23,9 +25,9 @@ struct SearchView: View {
                     List(self.presenter.list) { game in
                         ZStack(alignment: .leading) {
                             GameRow(game: game)
-                            self.presenter.linkBuilder(for: game.id, content: {
+                            NavigationLink(destination: router.makeDetailView(for: game.id)) {
                                 EmptyView()
-                            })
+                            }.opacity(0.0)
                         }
                         .listRowSeparator(.hidden)
                     }

@@ -1,50 +1,47 @@
 //
-//  FavoritePresenter.swift
-//  Rawg.io
+//  File.swift
+//  
 //
-//  Created by Leafy on 25/06/22.
+//  Created by Leafy on 06/07/22.
 //
 
 import SwiftUI
 import Combine
+import Core
+import Favorite
 
-class FavoritePresenter: ObservableObject {
+public class FavoritePresenter: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     
-    private let router = FavoriteRouter()
-    private let favoriteUseCase: FavoriteUseCase
+    typealias GetFavoriteUseCase = Interactor<Any, [GamesModel], GetFavoriteRepository<
+        GetFavoriteLocaleDataSource, FavoriteTransformer>>
+    private let useCase: GetFavoriteUseCase
     
-    @Published var list: [GamesModel] = []
-    @Published var errorMessage: String = ""
-    @Published var loadingState: Bool = false
+    @Published public var list: [GamesModel] = []
+    @Published public var errorMessage: String = ""
+    @Published public var isLoading: Bool = false
+    @Published public var isError: Bool = false
     
-    init(favoriteUseCase: FavoriteUseCase) {
-        self.favoriteUseCase = favoriteUseCase
+    init(useCase: GetFavoriteUseCase) {
+        self.useCase = useCase
     }
     
-    func retrieveData() {
-        loadingState = true
-        favoriteUseCase.getAllFavorites()
+    public func getList() {
+        isLoading = true
+        self.useCase.execute(request: nil)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
-                case .failure:
-                    self.errorMessage = String(describing: completion)
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    self.isError = true
+                    self.isLoading = false
                 case .finished:
-                    self.loadingState = false
+                    self.isLoading = false
                 }
             }, receiveValue: { list in
                 self.list = list
             })
             .store(in: &cancellables)
-    }
-    
-    func linkBuilder<Content: View>(
-        for id: Int,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        NavigationLink(destination: router.makeDetailView(for: id)) {
-            content()
-        }.opacity(0.0)
     }
 }

@@ -1,58 +1,55 @@
 //
-//  GameObserver.swift
-//  Rawg.io
+//  File.swift
 //
-//  Created by Leafy on 07/06/22.
+//
+//  Created by Leafy on 06/07/22.
 //
 
 import SwiftUI
 import Combine
+import Core
+import Games
 
-class SearchPresenter: ObservableObject {
+public class SearchPresenter: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
-    
     private var queryPublisher: AnyCancellable?
     
-    private let router = SearchRouter()
-    private let searchUseCase: SearchUseCase
+    typealias GetSearchUseCase = Interactor<String, [GamesModel], GetGamesRepository<
+            GetGamesRemoteDataSource, GamesTransformer>>
+    private let useCase: GetSearchUseCase
     
-    @Published var query = ""
-    @Published var list: [GamesModel] = []
-    @Published var errorMessage: String = ""
-    @Published var loadingState: Bool = true
+    @Published public var query = ""
+    @Published public var list: [GamesModel] = []
+    @Published public var errorMessage: String = ""
+    @Published public var isLoading: Bool = false
+    @Published public var isError: Bool = false
     
-    init(searchUseCase: SearchUseCase) {
-        self.searchUseCase = searchUseCase
-        self.queryPublisher = $query
+    init(useCase: GetSearchUseCase) {
+        self.useCase = useCase
+        queryPublisher = $query
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink(receiveValue: { search in
-                self.retrieveData(query: search)
+                self.getList(request: search)
             })
     }
     
-    func retrieveData(query search: String = "") {
-        loadingState = true
-        searchUseCase.getGamesList(search: search)
+    public func getList(request: String = "") {
+        isLoading = true
+        self.useCase.execute(request: request.isEmpty ? Endpoints.Gets.popular.url
+                             : Endpoints.Gets.search(query: request).url)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
-                case .failure:
-                    self.errorMessage = String(describing: completion)
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    self.isError = true
+                    self.isLoading = false
                 case .finished:
-                    self.loadingState = false
+                    self.isLoading = false
                 }
             }, receiveValue: { list in
                 self.list = list
             })
             .store(in: &cancellables)
-    }
-    
-    func linkBuilder<Content: View>(
-        for id: Int,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        NavigationLink(destination: router.makeDetailView(for: id)) {
-            content()
-        }.opacity(0.0)
     }
 }

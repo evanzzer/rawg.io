@@ -10,8 +10,12 @@ import Swinject
 
 class FavoriteRouter {
     func makeDetailView(for id: Int) -> some View {
+        let injection = DetailInjection.init()
         return DetailView(id: id, presenter: DetailPresenter(
-            detailUseCase: Assembler.sharedAssembler.resolver.resolve(DetailUseCase.self)!
+            getDetailUseCase: injection.provideDetails(),
+            addFavoriteUseCase: injection.provideAddItem(),
+            getFavoriteStateUseCase: injection.provideFavoriteStatus(),
+            deleteFavoriteUseCase: injection.provideDeleteItem()
         ))
     }
 }

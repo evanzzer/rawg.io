@@ -30,7 +30,7 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            if presenter.loadingState {
+            if presenter.isLoading {
                 ProgressView().progressViewStyle(.circular)
             } else {
                 if !presenter.errorMessage.isEmpty {
@@ -85,7 +85,7 @@ struct DetailView: View {
                     Image(systemName: presenter.isFavorited ? "star.fill" : "star")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            if !presenter.loadingState {
+                            if !presenter.isLoading {
                                 if let data = presenter.data {
                                     if presenter.isFavorited {
                                         presenter.deleteFromFavoriteList(id: id) {
@@ -195,14 +195,19 @@ extension DetailView {
                     Text(data.publishers)
                 }
             }
+            Spacer()
         }
     }
 }
 
 struct Previews_GameDetail_Previews: PreviewProvider {
     static var previews: some View {
+        let injection = DetailInjection.init()
         DetailView(id: 3498, presenter: DetailPresenter(
-            detailUseCase: Assembler.sharedAssembler.resolver.resolve(DetailUseCase.self)!
+            getDetailUseCase: injection.provideDetails(),
+            addFavoriteUseCase: injection.provideAddItem(),
+            getFavoriteStateUseCase: injection.provideFavoriteStatus(),
+            deleteFavoriteUseCase: injection.provideDeleteItem()
         ))
     }
 }

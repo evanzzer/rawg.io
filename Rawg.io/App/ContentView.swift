@@ -9,6 +9,9 @@ import SwiftUI
 import Swinject
 
 struct ContentView: View {
+    @EnvironmentObject var searchPresenter: SearchPresenter
+    @EnvironmentObject var favoritePresenter: FavoritePresenter
+    
     @Environment(\.colorScheme) var colorScheme
     
     enum Tab: Int {
@@ -23,18 +26,14 @@ struct ContentView: View {
                 if selectedTab == .first {
                     NavigationView {
                         VStack(spacing: 0) {
-                            SearchView(presenter: SearchPresenter(
-                                searchUseCase: Assembler.sharedAssembler.resolver.resolve(SearchUseCase.self)!
-                            ))
+                            SearchView(presenter: searchPresenter)
                             tabBarView
                         }
                     }
                 } else if selectedTab == .second {
                     NavigationView {
                         VStack(spacing: 0) {
-                            FavoriteView(presenter: FavoritePresenter(
-                                favoriteUseCase: Assembler.sharedAssembler.resolver.resolve(FavoriteUseCase.self)!
-                            ))
+                            FavoriteView(presenter: favoritePresenter)
                             tabBarView
                         }
                     }

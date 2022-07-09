@@ -10,16 +10,22 @@ import SwiftUI
 struct FavoriteView: View {
     @ObservedObject var presenter: FavoritePresenter
     
+    private let router = FavoriteRouter()
+    
     var body: some View {
         VStack {
-            if presenter.loadingState {
+            if presenter.isLoading {
                 ProgressView().progressViewStyle(.circular)
             } else {
-                if presenter.list.count > 0 {
+                if presenter.isError {
+                    Text(presenter.errorMessage)
+                } else if presenter.list.count > 0 {
                     List(presenter.list) { game in
                         ZStack(alignment: .leading) {
-                            GameRow(game: game)
-                            presenter.linkBuilder(for: game.id, content: { EmptyView() })
+                            FavoriteRow(game: game)
+                            NavigationLink(destination: router.makeDetailView(for: game.id)) {
+                                EmptyView()
+                            }.opacity(0.0)
                         }
                         .listRowSeparator(.hidden)
                     }
@@ -41,7 +47,7 @@ struct FavoriteView: View {
             }
             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             .onAppear {
-                presenter.retrieveData()
+                presenter.getList()
             }
     }
 }

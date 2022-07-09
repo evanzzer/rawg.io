@@ -5,33 +5,58 @@
 //  Created by Leafy on 07/06/22.
 //
 
-import Foundation
+import SwiftUI
 import Combine
+import Core
+import Favorite
+import Details
 
 class DetailPresenter: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     
-    private let detailUseCase: DetailUseCase
+    typealias GetDetailUseCase = Interactor<String, DetailModel, GetDetailRepository<
+        GetDetailRemoteDataSource, DetailTransformer>>
+    typealias AddFavoriteUseCase = Interactor<GamesModel, Bool, AddFavoriteRepository<
+        FavoriteDetailLocaleDataSource, GamesTransformer>>
+    typealias GetFavoriteStateUseCase = Interactor<Int, Bool, GetFavoriteStatusRepository<
+        FavoriteDetailLocaleDataSource>>
+    typealias DeleteFavoriteUseCase = Interactor<Int, Bool, DeleteFavoriteRepository<
+        FavoriteDetailLocaleDataSource>>
     
-    @Published var data: GamesDetailModel?
+    // 5 Use Cases
+    private let getDetailUseCase: GetDetailUseCase
+    private let addFavoriteUseCase: AddFavoriteUseCase
+    private let getFavoriteStateUseCase: GetFavoriteStateUseCase
+    private let deleteFavoriteUseCase: DeleteFavoriteUseCase
+    
+    @Published var data: DetailModel?
     @Published var errorMessage: String = ""
-    @Published var loadingState: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var isError: Bool = false
     @Published var isFavorited: Bool = false
     
-    init(detailUseCase: DetailUseCase) {
-        self.detailUseCase = detailUseCase
+    init(
+        getDetailUseCase: GetDetailUseCase,
+        addFavoriteUseCase: AddFavoriteUseCase,
+        getFavoriteStateUseCase: GetFavoriteStateUseCase,
+        deleteFavoriteUseCase: DeleteFavoriteUseCase
+    ) {
+        self.getDetailUseCase = getDetailUseCase
+        self.addFavoriteUseCase = addFavoriteUseCase
+        self.getFavoriteStateUseCase = getFavoriteStateUseCase
+        self.deleteFavoriteUseCase = deleteFavoriteUseCase
     }
     
     func retrieveData(id: Int) {
-        loadingState = true
-        detailUseCase.getGamesDetail(id: id)
+        isLoading = true
+        getDetailUseCase.execute(request: Endpoints.Gets.details(id: id).url)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure:
                     self.errorMessage = String(describing: completion)
                 case .finished:
-                    self.loadingState = false
+                    self.isLoading = false
                 }
             }, receiveValue: { data in
                 self.data = data
@@ -40,7 +65,7 @@ class DetailPresenter: ObservableObject {
     }
     
     func retrieveFavoriteStatus(id: Int) {
-        detailUseCase.getFavoriteGameById(id: id)
+        getFavoriteStateUseCase.execute(request: id)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { _ in }, receiveValue: { isFavorited in self.isFavorited = isFavorited })
             .store(in: &cancellables)
@@ -50,7 +75,8 @@ class DetailPresenter: ObservableObject {
     func insertToFavoriteList(
         id: Int, name: String, released: String?, imageUrl: String?, rating: Double, _ completion: @escaping() -> Void
     ) {
-        detailUseCase.insertFavoriteGame(id: id, name: name, released: released, imageUrl: imageUrl, rating: rating)
+        let gamesModel = GamesModel(id: id, name: name, released: released, imageUrl: imageUrl, rating: rating)
+        addFavoriteUseCase.execute(request: gamesModel)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { cmpt in
                 switch cmpt {
@@ -63,7 +89,7 @@ class DetailPresenter: ObservableObject {
     }
     
     func deleteFromFavoriteList(id: Int, _ completion: @escaping() -> Void) {
-        detailUseCase.removeFavoriteGame(id: id)
+        deleteFavoriteUseCase.execute(request: id)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { cmpt in
                 switch cmpt {

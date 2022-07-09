@@ -21,8 +21,6 @@ jobs:
     steps:
     - name: Checkout Project
       uses: actions/checkout@v1
-    - name: Install swiftlint
-      run: brew install swiftlint
     - name: Show the currently detailed version of Xcode for CLI
       run: xcode-select -p
     - name: Show Build Settings

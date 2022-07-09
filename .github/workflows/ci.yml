@@ -16,17 +16,17 @@ jobs:
     steps:
     - name: Checkout Project
       uses: actions/checkout@v1
-    - name: Make dummy file Rawg.io.plist
-      run: touch Rawg.io/Rawg.io.plist
-    - name: Show the currently detailed version of Xcode for CLI
-      run: xcode-select -p
-    - name: Show Build Settings
-      run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showBuildSettings
-    - name: Show Build SDK
-      run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showsdks
-    - name: Show Available Destinations
-      run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showdestinations
-    - name: Swift Linting
-      run: swiftlint --config .swiftlint.yml
-    - name: Build Project
-      run: xcodebuild build -project Rawg.io.xcodeproj -scheme Rawg.io CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -showBuildTimingSummary
+    - name: Check Location File
+      run: ls -la
+#     - name: Show the currently detailed version of Xcode for CLI
+#       run: xcode-select -p
+#     - name: Show Build Settings
+#       run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showBuildSettings
+#     - name: Show Build SDK
+#       run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showsdks
+#     - name: Show Available Destinations
+#       run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showdestinations
+#     - name: Swift Linting
+#       run: swiftlint --config .swiftlint.yml
+#     - name: Build Project
+#       run: xcodebuild build -project Rawg.io.xcodeproj -scheme Rawg.io CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO -showBuildTimingSummary

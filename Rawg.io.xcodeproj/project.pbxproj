@@ -272,9 +272,9 @@
 			buildPhases = (
 				88677D8E284F370900D9F46C /* Sources */,
 				88677D8F284F370900D9F46C /* Frameworks */,
+				88EBD8412879A12C00A123D0 /* Copy Rawg.io.plist File */,
 				88677D90284F370900D9F46C /* Resources */,
 				8887E2D82865A5DD000F7F7B /* SwiftLint */,
-				88EBD8412879A12C00A123D0 /* Copy Rawg.io.plist File */,
 			);
 			buildRules = (
 			);

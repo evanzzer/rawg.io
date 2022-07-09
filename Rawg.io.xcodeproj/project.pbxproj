@@ -23,6 +23,7 @@
 		88677DAF284F579500D9F46C /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88677DAE284F579500D9F46C /* GameRow.swift */; };
 		88677DB1284F585200D9F46C /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88677DB0284F585200D9F46C /* SearchView.swift */; };
 		887482962879A2B80006213E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 887482952879A2B80006213E /* .gitignore */; };
+		887482972879A86A0006213E /* Rawg.io.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88EBD83F2879A0DE00A123D0 /* Rawg.io.plist */; };
 		8887E2D028659FA4000F7F7B /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8887E2CF28659FA4000F7F7B /* Realm */; };
 		8887E2D228659FA4000F7F7B /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8887E2D128659FA4000F7F7B /* RealmSwift */; };
 		8887E2D528659FBB000F7F7B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8887E2D428659FBB000F7F7B /* SDWebImageSwiftUI */; };
@@ -40,8 +41,6 @@
 		88E5FFB12875E4C9005204A0 /* GamesInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5FFB02875E4C9005204A0 /* GamesInjection.swift */; };
 		88E5FFB32876D4AD005204A0 /* FavoriteInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5FFB22876D4AD005204A0 /* FavoriteInjection.swift */; };
 		88E5FFB52876D556005204A0 /* DetailInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5FFB42876D556005204A0 /* DetailInjection.swift */; };
-		88EBD8402879A0DE00A123D0 /* Rawg.io.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88EBD83F2879A0DE00A123D0 /* Rawg.io.plist */; };
-		88EBD8432879A15200A123D0 /* Rawg.io-Sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88EBD8422879A15200A123D0 /* Rawg.io-Sample.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -340,8 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88EBD8432879A15200A123D0 /* Rawg.io-Sample.plist in Resources */,
-				88EBD8402879A0DE00A123D0 /* Rawg.io.plist in Resources */,
+				887482972879A86A0006213E /* Rawg.io.plist in Resources */,
 				885BED252867738A000A2DBA /* .swiftlint.yml in Resources */,
 				88677D9D284F370A00D9F46C /* Preview Assets.xcassets in Resources */,
 				887482962879A2B80006213E /* .gitignore in Resources */,

@@ -27,4 +27,4 @@ jobs:
     - name: Swift Linting
       run: swiftlint --config .swiftlint.yml
     - name: Build Project
-      run: xcodebuild build -project Rawg.io.xcodeproj -configuration Release -scheme Rawg.io -showBuildTimingSummary
+      run: xcodebuild build -project Rawg.io.xcodeproj -configuration Release -scheme Rawg.io -allowProvisioningUpdates -showBuildTimingSummary

@@ -16,6 +16,8 @@ jobs:
     steps:
     - name: Checkout Project
       uses: actions/checkout@v1
+    - name: Make dummy file Rawg.io.plist
+      run: touch Rawg.io/Rawg.io.plist
     - name: Show the currently detailed version of Xcode for CLI
       run: xcode-select -p
     - name: Show Build Settings

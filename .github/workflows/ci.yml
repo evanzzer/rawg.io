@@ -12,11 +12,6 @@ on:
 jobs:
   build:
     runs-on: macos-12
-    strategy:
-      matrix:
-        run-config:
-          - { scheme: 'MPCF-Reflector-ios', destination: 'platform=iOS Simulator,OS=13.4.1,name=iPhone 8' }
-          - { scheme: 'MPCF-TestRunner-ios', destination: 'platform=iOS Simulator,OS=13.4.1,name=iPhone 8' }
 
     steps:
     - name: Checkout Project
@@ -24,14 +19,14 @@ jobs:
     - name: Show the currently detailed version of Xcode for CLI
       run: xcode-select -p
     - name: Show Build Settings
-      run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showBuildSettings
+      run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showBuildSettings
     - name: Show Build SDK
-      run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showsdks
+      run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showsdks
     - name: Show Available Destinations
-      run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showdestinations
+      run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showdestinations
     - name: lint
       run: swift format lint --configuration .swift-format-config -r .
       env:
         DEVELOPER_DIR: /Applications/Xcode_13.3.1.app/Contents/Developer
     - name: build and test
-      run: xcodebuild clean test -scheme '${{ matrix.run-config['scheme'] }}' -destination '${{ matrix.run-config['destination'] }}' -showBuildTimingSummary
+      run: xcodebuild clean test -scheme Rawg.io -destination 'platform=iOS Simulator,OS=13.4.1,name=iPhone 8' -showBuildTimingSummary

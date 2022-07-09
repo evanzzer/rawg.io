@@ -24,11 +24,11 @@ jobs:
     - name: Show the currently detailed version of Xcode for CLI
       run: xcode-select -p
     - name: Show Build Settings
-      run: xcodebuild Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showBuildSettings
+      run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showBuildSettings
     - name: Show Build SDK
-      run: xcodebuild Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showsdks
+      run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showsdks
     - name: Show Available Destinations
-      run: xcodebuild Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showdestinations
+      run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showdestinations
     - name: lint
       run: swift format lint --configuration .swift-format-config -r .
     - name: build and test

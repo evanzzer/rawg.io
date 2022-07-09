@@ -26,5 +26,5 @@ jobs:
       run: xcodebuild -project Rawg.io.xcodeproj -scheme Rawg.io -showdestinations
     - name: Swift Linting
       run: swiftlint --config .swiftlint.yml
-    - name: build and test
-      run: xcodebuild clean test -scheme Rawg.io -destination 'platform=iOS Simulator,OS=13.4.1,name=iPhone 8' -showBuildTimingSummary
+    - name: Build Project
+      run: xcodebuild build -project Rawg.io.xcodeproj -target Rawg.io -configuration Release -scheme Rawg.io -showBuildTimingSummary

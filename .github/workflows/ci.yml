@@ -25,21 +25,13 @@ jobs:
       run: xcode-select -p
     - name: Show Build Settings
       run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showBuildSettings
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_13.3.1.app/Contents/Developer
     - name: Show Build SDK
       run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showsdks
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_13.3.1.app/Contents/Developer
     - name: Show Available Destinations
       run: xcodebuild -project Rawg.io.xcodeproj -scheme '${{ matrix.run-config['scheme'] }}' -showdestinations
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_13.3.1.app/Contents/Developer
     - name: lint
       run: swift format lint --configuration .swift-format-config -r .
       env:
         DEVELOPER_DIR: /Applications/Xcode_13.3.1.app/Contents/Developer
     - name: build and test
       run: xcodebuild clean test -scheme '${{ matrix.run-config['scheme'] }}' -destination '${{ matrix.run-config['destination'] }}' -showBuildTimingSummary
-      env:
-        DEVELOPER_DIR: /Applications/Xcode_13.3.1.app/Contents/Developer

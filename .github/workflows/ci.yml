@@ -17,7 +17,7 @@ jobs:
     - name: Checkout Project
       uses: actions/checkout@v1
     - name: Rename existing sample file
-      run: mv Rawg.io-Sample.plist Rawg.io.plist
+      run: mv Rawg.io/Rawg.io-Sample.plist Rawg.io/Rawg.io.plist
     - name: Check Location File
       run: ls -la Rawg.io
 #     - name: Show the currently detailed version of Xcode for CLI

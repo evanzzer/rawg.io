@@ -28,7 +28,6 @@
 		8887E2E72865BE13000F7F7B /* Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8887E2E62865BE13000F7F7B /* Injection.swift */; };
 		888A0A6628537474009D3CF1 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888A0A6528537474009D3CF1 /* FavoriteView.swift */; };
 		888B9EBB28796E6D00E3EDF9 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888B9EBA28796E6D00E3EDF9 /* APICall.swift */; };
-		888B9EBD28796E7600E3EDF9 /* env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888B9EBC28796E7600E3EDF9 /* env.swift */; };
 		888B9EBF2879700200E3EDF9 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888B9EBE2879700200E3EDF9 /* FavoritePresenter.swift */; };
 		888B9EC12879700700E3EDF9 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888B9EC02879700700E3EDF9 /* SearchPresenter.swift */; };
 		888F79E128659A4100D8B9AF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 888F79E028659A4100D8B9AF /* Alamofire */; };
@@ -40,6 +39,8 @@
 		88E5FFB12875E4C9005204A0 /* GamesInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5FFB02875E4C9005204A0 /* GamesInjection.swift */; };
 		88E5FFB32876D4AD005204A0 /* FavoriteInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5FFB22876D4AD005204A0 /* FavoriteInjection.swift */; };
 		88E5FFB52876D556005204A0 /* DetailInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5FFB42876D556005204A0 /* DetailInjection.swift */; };
+		88EBD8402879A0DE00A123D0 /* Rawg.io.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88EBD83F2879A0DE00A123D0 /* Rawg.io.plist */; };
+		88EBD8432879A15200A123D0 /* Rawg.io-Sample.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88EBD8422879A15200A123D0 /* Rawg.io-Sample.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +63,6 @@
 		8887E2E62865BE13000F7F7B /* Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injection.swift; sourceTree = "<group>"; };
 		888A0A6528537474009D3CF1 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		888B9EBA28796E6D00E3EDF9 /* APICall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
-		888B9EBC28796E7600E3EDF9 /* env.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = env.swift; sourceTree = "<group>"; };
 		888B9EBE2879700200E3EDF9 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
 		888B9EC02879700700E3EDF9 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		889961DB2878974600C730A9 /* ProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
@@ -72,6 +72,8 @@
 		88E5FFB02875E4C9005204A0 /* GamesInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesInjection.swift; sourceTree = "<group>"; };
 		88E5FFB22876D4AD005204A0 /* FavoriteInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInjection.swift; sourceTree = "<group>"; };
 		88E5FFB42876D556005204A0 /* DetailInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInjection.swift; sourceTree = "<group>"; };
+		88EBD83F2879A0DE00A123D0 /* Rawg.io.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Rawg.io.plist; sourceTree = "<group>"; };
+		88EBD8422879A15200A123D0 /* Rawg.io-Sample.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Rawg.io-Sample.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +150,8 @@
 		88677D94284F370900D9F46C /* Rawg.io */ = {
 			isa = PBXGroup;
 			children = (
-				888B9EBC28796E7600E3EDF9 /* env.swift */,
+				88EBD8422879A15200A123D0 /* Rawg.io-Sample.plist */,
+				88EBD83F2879A0DE00A123D0 /* Rawg.io.plist */,
 				888F79CB2865984B00D8B9AF /* App */,
 				888F79CC2865986500D8B9AF /* Core */,
 				88677DA4284F3ABD00D9F46C /* View */,
@@ -268,6 +271,7 @@
 				88677D8F284F370900D9F46C /* Frameworks */,
 				88677D90284F370900D9F46C /* Resources */,
 				8887E2D82865A5DD000F7F7B /* SwiftLint */,
+				88EBD8412879A12C00A123D0 /* Copy Rawg.io.plist File */,
 			);
 			buildRules = (
 			);
@@ -333,6 +337,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88EBD8432879A15200A123D0 /* Rawg.io-Sample.plist in Resources */,
+				88EBD8402879A0DE00A123D0 /* Rawg.io.plist in Resources */,
 				885BED252867738A000A2DBA /* .swiftlint.yml in Resources */,
 				88677D9D284F370A00D9F46C /* Preview Assets.xcassets in Resources */,
 				88677D9A284F370A00D9F46C /* Assets.xcassets in Resources */,
@@ -360,6 +366,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		88EBD8412879A12C00A123D0 /* Copy Rawg.io.plist File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Rawg.io.plist File";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nCONFIG_FILE_BASE_NAME=\"Rawg.io\"\n\nCONFIG_FILE_NAME=${CONFIG_FILE_BASE_NAME}.plist\nSAMPLE_CONFIG_FILE_NAME=${CONFIG_FILE_BASE_NAME}-Sample.plist\n\nCONFIG_FILE_PATH=$SRCROOT/$PRODUCT_NAME/$CONFIG_FILE_NAME\nSAMPLE_CONFIG_FILE_PATH=$SRCROOT/$PRODUCT_NAME/$SAMPLE_CONFIG_FILE_NAME\n\nif [ -f \"$CONFIG_FILE_PATH\" ]; then\n  echo \"$CONFIG_FILE_PATH exists.\"\nelse\n  echo \"$CONFIG_FILE_PATH does not exist, copying sample\"\n  cp -v \"${SAMPLE_CONFIG_FILE_PATH}\" \"${CONFIG_FILE_PATH}\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -372,7 +396,6 @@
 				885539242855D52B00FC92E9 /* EditView.swift in Sources */,
 				88E5FFB32876D4AD005204A0 /* FavoriteInjection.swift in Sources */,
 				8887E2E72865BE13000F7F7B /* Injection.swift in Sources */,
-				888B9EBD28796E7600E3EDF9 /* env.swift in Sources */,
 				88677D98284F370900D9F46C /* ContentView.swift in Sources */,
 				885381F0284F88CF0050BA7A /* ProfileView.swift in Sources */,
 				8825863A28797931000D09AE /* FavoriteRow.swift in Sources */,
